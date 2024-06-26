@@ -50,7 +50,7 @@ You can use it as a sandbox to play with Writerside features, and remove it from
 但您可以通过添加以下属性来修改行为:
 `default-state="expanded"`
 
-### 将选择转换为 XML 
+### 将选择转换为 XML-1
 如果需要为某个元素扩展更多功能，可以将选定的内容从 Markdown 转换为语义标记.
 例如，如果您想合并表格中的单元格，将其转换为 XML 比在 Markdown 中执行此操作要容易得多.
 将插入符号放置在表格中的任意位置并按 <shortcut>Alt+Enter</shortcut>:
