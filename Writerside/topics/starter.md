@@ -1,35 +1,35 @@
-# Starter
+# 新的开始
 
 <!--Writerside adds this topic when you create a new documentation project.
 You can use it as a sandbox to play with Writerside features, and remove it from the TOC when you don't need it anymore.-->
 
-## Add new topics
-You can create empty topics, or choose a template for different types of content that contains some boilerplate structure to help you get started:
+## 添加新主题
+您可以创建空主题，或为不同类型的内容选择一个模板，其中包含一些样板结构以帮助您入门:
 
 ![Create new topic options](new_topic_options.png){ width=290 }{border-effect=line}
 
-## Write content
-%product% supports two types of markup: Markdown and XML.
-When you create a new help article, you can choose between two topic types, but this doesn't mean you have to stick to a single format.
-You can author content in Markdown and extend it with semantic attributes or inject entire XML elements.
+## 书写内容
+%product% 支持两种类型的标记：Markdown 和 XML.
+创建新的帮助文章时，您可以在两种主题类型之间进行选择，但这并不意味着您必须坚持单一格式.
+您可以在 Markdown 中创作内容并使用语义属性扩展它或注入整个 XML 元素.
 
-## Inject XML
-For example, this is how you inject a procedure:
+## 插入 XML
+例如，这就是注入过程的方式:
 
-<procedure title="Inject a procedure" id="inject-a-procedure">
+<procedure title="注入一个过程" id="inject-a-procedure">
     <step>
-        <p>Start typing and select a procedure type from the completion suggestions:</p>
+        <p>开始输入并从完成建议中选择程序类型:</p>
         <img src="completion_procedure.png" alt="completion suggestions for procedure" border-effect="line"/>
     </step>
     <step>
-        <p>Press <shortcut>Tab</shortcut> or <shortcut>Enter</shortcut> to insert the markup.</p>
+        <p>按下 <shortcut>Tab</shortcut> 或者 <shortcut>Enter</shortcut> 插入标记.</p>
     </step>
 </procedure>
 
-## Add interactive elements
+## 添加互动元素
 
-### Tabs
-To add switchable content, you can make use of tabs (inject them by starting to type `tab` on a new line):
+### 选项卡
+要添加可切换内容，您可以使用选项卡 (通过在新行上输入`tab`来注入它们):
 
 <tabs>
     <tab title="Markdown">
@@ -41,33 +41,33 @@ To add switchable content, you can make use of tabs (inject them by starting to 
     </tab>
 </tabs>
 
-### Collapsible blocks
-Apart from injecting entire XML elements, you can use attributes to configure the behavior of certain elements.
-For example, you can collapse a chapter that contains non-essential information:
+### 可折叠块
+除了注入整个 XML 元素之外，您还可以使用属性来配置某些元素的行为.
+例如，您可以折叠包含非必要信息的章节:
 
-#### Supplementary info {collapsible="true"}
-Content under a collapsible header will be collapsed by default,
-but you can modify the behavior by adding the following attribute:
+#### 补充信息 {collapsible="true"}
+默认情况下，可折叠标题下的内容将折叠,
+但您可以通过添加以下属性来修改行为:
 `default-state="expanded"`
 
-### Convert selection to XML
-If you need to extend an element with more functions, you can convert selected content from Markdown to semantic markup.
-For example, if you want to merge cells in a table, it's much easier to convert it to XML than do this in Markdown.
-Position the caret anywhere in the table and press <shortcut>Alt+Enter</shortcut>:
+### 将选择转换为 XML 
+如果需要为某个元素扩展更多功能，可以将选定的内容从 Markdown 转换为语义标记.
+例如，如果您想合并表格中的单元格，将其转换为 XML 比在 Markdown 中执行此操作要容易得多.
+将插入符号放置在表格中的任意位置并按 <shortcut>Alt+Enter</shortcut>:
 
 <img src="convert_table_to_xml.png" alt="Convert table to XML" width="706" border-effect="line"/>
 
-## Feedback and support
-Please report any issues, usability improvements, or feature requests to our
+## 反馈和支持
+请向我们报告任何问题、可用性改进或功能请求
 <a href="https://youtrack.jetbrains.com/newIssue?project=WRS">YouTrack project</a>
-(you will need to register).
+(你需要注册).
 
-You are welcome to join our
+欢迎您加入我们
 <a href="https://jb.gg/WRS_Slack">public Slack workspace</a>.
-Before you do, please read our [Code of conduct](https://plugins.jetbrains.com/plugin/20158-writerside/docs/writerside-code-of-conduct.html).
-We assume that you’ve read and acknowledged it before joining.
+在此之前，请阅读我们的 [Code of conduct](https://plugins.jetbrains.com/plugin/20158-writerside/docs/writerside-code-of-conduct.html).
+我们假设您在加入之前已阅读并确认.
 
-You can also always email us at [writerside@jetbrains.com](mailto:writerside@jetbrains.com).
+您也可以随时给我们发电子邮件： [writerside@jetbrains.com](mailto:writerside@jetbrains.com).
 
 <seealso>
     <category ref="wrs">

@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+
+
 <buildprofiles xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <variables></variables>
+    <footer>
+<!--        <social type="blog" href="https://xm137.org.cn/">XM137</social>-->
+<!--        <social type="twitter" href="https://twitter.com/onwriterside">Writerside on Twitter</social>-->
+
+        <link href="https://xm137.org.cn/">XM137.org.cn</link>
+        <link href="https://xm137.com.cn/">XM137.com.cn</link>
+        <link href="https://xm137.xyz/">XM137.xyz</link>
+
+        <copyright>2023-2024 XM137</copyright>
+    </footer>
     <build-profile instance="xb">
         <variables>
             <noindex-content>true</noindex-content>
@@ -10,3 +23,6 @@
     </build-profile>
 
 </buildprofiles>
+
+
+
