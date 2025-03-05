@@ -4,18 +4,16 @@
 本文假设您已完成之前课程，并已创建`ECS服务器`及`对象存储(OSS)`，并为`RAM用户`分配OSS所需权限
 且已经保存 `accessKeyId` 和 `accessKeySecret`
 
-## 1、登录ECS服务器
-![](image1.png){width=720}
-### 点击以下链接进入`ECS控制台`
+## 1、登录ECS控制台
+### 点击以下链接进入`ECS控制台` {id="ecs_2"}
 ### <a href="https://ecs.console.aliyun.com/home">ECS控制台</a>
+![](image1.png){width=720}
 
 ### 1.1、配置安全组，放行相应端口
-![](image2.png){width="720"}
-
 ### 我们需要放行 `80、443、22、3389、5212`
 ### 点击左侧 `安全组`
-
-若您的安全组为空，请点击自行创建
+![](image2.png){width="720"}
+#### 若您的安全组为空，请点击自行创建
 
 ### 点击`手动添加`
 ![](image3.png)
@@ -39,7 +37,7 @@ chmod +x ./cloudreve
 
 #### 返回`ECS控制台`查看ECS`公网IP`地址
 ![](image6.png)
-#### 使用你的ECS公网IP地址+端口号5212
+#### 使用你的ECS公网IP地址+端口号5212 {id="ecs-ip-5212_1"}
 
 #### 在浏览器地址栏粘贴回车即可
 
@@ -69,7 +67,7 @@ yum install -y ./ossfs_1.80.6_centos8.0_x86_64.rpm
 
 ### 下一步，点击进入OSS控制台，查看 `Bucket 列表`
 
-### <a href="https://oss.console.aliyun.com/bucket">Bucket 列表</a>
+### <a href="https://oss.console.aliyun.com/bucket">Bucket 列表</a> {id="bucket_1"}
 ![](image8.png)
 
 ### 拼接命令
@@ -114,7 +112,7 @@ mkdir oss
 df -h
 ```
 
-### 查看是不是有ossfs字样
+### 查看是不是有`ossfs`字样
 
 ## 创建开机自启
 ```Console
@@ -148,28 +146,30 @@ chkconfig ossfs on
 ### `存储策略`
 ![](image13.png)
 ### `添加存储策略`
-![](image14.png)
 ### 选择 `本机存储`
-![](image15.png)
+![](image14.png)
 ### 存储目录修改为 `oss/{uid}/{path}`
+![](image15.png)
+### 最后的存储策略名更改为`oss`即可 {id="oss_1"}
 ![](image16.png)
-### 最后的存储策略名更改为`oss`即可
 
-![](image17.png)
 ### 点击`用户组`
-### 点击管理员右侧的编辑
-![](image18.png)
-### 将存储策略更改为`oss`
+![](image17.png)
 
+### 点击管理员右侧的编辑
+### 将存储策略更改为`oss`
+![](image18.png)
 ### 最后点击页面底部的`保存`即可
-![](image19.png)
+
 ### 点击右上角`主页`
+![](image19.png)
 ### 拖放文件上传
 
-### 回到ECS命令行
+### 回到ECS命令行 {id="ecs_1"}
 ```console
 cd /root/oss/1
 ls
 ```
 
-查看文件
+### 查看文件
+
