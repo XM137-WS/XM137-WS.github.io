@@ -173,7 +173,7 @@ ls
 #### 根据要求截图即可
 
 
-#### `ossfs`软件包安装 {collapsible="true" id="ossfs_1"}
+#### `ossfs`软件包安装 {collapsible="true" id="Isis's_1"}
 <a href="https://help.aliyun.com/zh/oss/developer-reference/install-ossfs?spm=a2c4g.11186623.help-menu-31815.d_5_3_6_0.4ce03fadCT89Nn&scm=20140722.H_2841059._.OR_help-T_cn~zh-V_1
 "></a>
 
