@@ -1,140 +1,175 @@
 # 3、ECS+OSS搭建个人网盘
 阿里云实验链接: <a href="https://developer.aliyun.com/adc/scenario/43c2957814ab40a0917e482f16780cff?spm=a2c6h.13858375.devcloud-scene-list.4.31304090Dv3l9o">使用ECS和OSS搭建个人网盘</a>
 
-本文假设您已完成之前课程，并已创建ECS服务器及对象存储(OSS)，并为RAM用户分配OSS所需权限
-且已经保存 accessKeyId 和 accessKeySecret
+本文假设您已完成之前课程，并已创建`ECS服务器`及`对象存储(OSS)`，并为`RAM用户`分配OSS所需权限
+且已经保存 `accessKeyId` 和 `accessKeySecret`
 
 ## 1、登录ECS服务器
 ![](image1.png){width=720}
-点击以下链接进入ECS控制台
-<a href="https://ecs.console.aliyun.com/home"></a>
+### 点击以下链接进入`ECS控制台`
+### <a href="https://ecs.console.aliyun.com/home">ECS控制台</a>
 
-点击选择你的ECS服务器，笔者两个实例，选择第二个是因为有公网
+### 1.1、配置安全组，放行相应端口
+![](image2.png){width="720"}
 
-下一步，我们需要配置安全组，放行相应端口
-我们需要放行 80、443、22、3389、5212
+### 我们需要放行 `80、443、22、3389、5212`
+### 点击左侧 `安全组`
 
-点击左侧 安全组 
-若您安全组为空，请自行创建
-点击手动添加
-端口范围内填写即可，每个端口间使用逗号隔开
+若您的安全组为空，请点击自行创建
 
-源 可选 我的IP 或者 所有网络，此处选择所有网络
-最后点击右侧保存即可
+### 点击`手动添加`
+![](image3.png)
+### 在端口范围内填写即可，每个端口间使用逗号隔开
 
-使用远程连接登录ECS 
+### `源` 可选 `我的IP` 或者 `所有网络`，此处选择`所有网络`
+![](image4.png)
 
+### 最后点击右侧`保存`即可
 
-## 2、下载 cloudreve 安装包
+## 2、安装 `cloudreve`
+
+```console
 wget https://labfileapp.oss-cn-hangzhou.aliyuncs.com/cloudreve_3.3.1_linux_amd64.tar.gz
 tar -zxvf cloudreve_3.3.1_linux_amd64.tar.gz
 chmod +x ./cloudreve
 ./cloudreve
+```
 
-请记录下显示出的账号密码，下文需要使用
+#### 请记录下显示出的账号密码，下文需要使用
 
-返回ECS控制台查看ECS公网IP地址
-使用你的ECS公网IP地址+端口号5212
-在浏览器地址栏粘贴回车即可
-例如
-169.254.32.12:5212
-上文地址不可访问，请以实际为准
+#### 返回`ECS控制台`查看ECS`公网IP`地址
+![](image6.png)
+#### 使用你的ECS公网IP地址+端口号5212
 
-使用上一步得到的账号密码进行登录即可
+#### 在浏览器地址栏粘贴回车即可
 
-顺利登录后，在ECS远程连接的终端 Ctrl+C 停止该进程
+#### 例如 `169.254.32.12:5212`
 
-对于本班大部分来说，都是CentOS7
-所以直接复制粘贴即可
+![](image7.png){width="720"}
 
+### 上文地址不可访问，请以实际为准
+
+### 使用上一步得到的账号密码进行登录即可
+
+### 顺利登录后，在ECS终端 `Ctrl+C` 停止该进程
+
+### 2.1 安装`oss`工具
+```console
 wget https://gosspublic.alicdn.com/ossfs/ossfs_1.80.6_centos8.0_x86_64.rpm
+```
 
-以下步骤将删除原有源并执行更新
+### 以下步骤包括删除原有源并执行更新
 
-
+```console
 rm -f /etc/yum.repos.d/*
 wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo
 yum clean all && yum makecache
-
-安装
 yum install -y ./ossfs_1.80.6_centos8.0_x86_64.rpm
+```
 
-下一步，点击以下进入OSS控制台，查看 Bucket 列表
+### 下一步，点击进入OSS控制台，查看 `Bucket 列表`
 
-<a href="https://oss.console.aliyun.com/bucket">Bucket 列表</a>
+### <a href="https://oss.console.aliyun.com/bucket">Bucket 列表</a>
+![](image8.png)
 
-复制 Bucket 名称
-
-返回终端
-
+### 拼接命令
+```Console
 echo Bucket名称:上节课用到的RAM账户AccessKeyId:RAM账户AccessKeySecret > /etc/passwd-ossfs
 
-例如: 
+```
+
+### 例如: 
+```Console
 echo abc:fsdafsfdsfdsfs:gdfgfdgfdgerdf > /etc/passwd-ossfs
 
-执行
+```
+
+### 添加执行权限
+```Console
 chmod 640 /etc/passwd-ossfs
 
+```
+
+#### 创建挂载点
+```Console
 mkdir oss
+```
 
-请在 Bucket 控制台查看 Endpoint
 
-点击 Bucket 名称后，在靠近左侧部分点击概览
-在页面底部即可看到Endpoint
+### 请在 Bucket 控制台查看 `Endpoint`
+### 点击 Bucket 名称后，在靠近左侧部分点击`概览`
+![](image9.png)
 
-此处分为内网和外网
-若您的ECS与OSS在同一地域，例如都在南京，请使用内网，若不在同一地域，请使用公网
+### 在页面底部即可看到`Endpoint`
+### 此处分为内网和外网
+![](image10.png)
+### 若您的ECS与OSS在同一地域，例如都在南京，请使用内网，若不在同一地域，请使用公网
 
-例如: ossfs Bucket名称 oss -o url=oss-cn-shanghai.aliyuncs.com
+### 例如: `ossfs Bucket名称 oss -o url=oss-cn-shanghai.aliyuncs.com`
 
-请将 Bucket名称 替换为你的Bucket名称 oss-cn-shanghai.aliyuncs.com 替换为你所查询到的Endpoint
+### 请将 Bucket名称 替换为你的Bucket名称 
 
+### `oss-cn-shanghai.aliyuncs.com` 替换为你所查询到的`Endpoint`
+```Console
 df -h
-查看是不是有ossfs字样
+```
+
+### 查看是不是有ossfs字样
 
 ## 创建开机自启
+```Console
 vim /etc/init.d/ossfs
-输入i进入编辑模式
-ossfs BucketName /root/oss -o url=Endpoint -oallow_other
-BucketName 与上文一致
-Endpoint 也与上文一致
+```
 
-修改完成以后，按下ESC
-输入:wq
-保存即可
+### 输入`i`进入编辑模式
+```Console
+ossfs BucketName /root/oss -o url=Endpoint -oallow_other
+```
+### `BucketName` 、 `Endpoint` 与上文一致
+
+### 修改完成以后，按下`ESC`输入`:wq` 保存即可
+```Console
 chmod a+x /etc/init.d/ossfs
 chkconfig ossfs on
+```
+
 
 ## 最后配置
+```Console
 ./cloudreve
-在浏览器地址栏输入ECS公网IP地址:5212
+```
+### 在浏览器地址栏输入`ECS公网IP地址:5212`
 
-使用之前的用户名密码登录
+### 使用之前的用户名密码登录
+![](image11.png)
 
-点击右上角头像，管理面板
+### 点击右上角头像，`管理面板`
+![](image12.png)
+### `存储策略`
+![](image13.png)
+### `添加存储策略`
+![](image14.png)
+### 选择 `本机存储`
+![](image15.png)
+### 存储目录修改为 `oss/{uid}/{path}`
+![](image16.png)
+### 最后的存储策略名更改为`oss`即可
 
-存储策略
+![](image17.png)
+### 点击`用户组`
+### 点击管理员右侧的编辑
+![](image18.png)
+### 将存储策略更改为`oss`
 
-添加存储策略
+### 最后点击页面底部的`保存`即可
+![](image19.png)
+### 点击右上角`主页`
+### 拖放文件上传
 
-选择 本机存储
-
-存储目录修改为 oss/{uid}/{path}
-
-最后的存储策略名更改为oss即可
-
-
-点击用户组
-点击管理员右侧的编辑
-
-将存储策略更改为oss
-
-最后点击页面底部的保存即可
-
-点击右上角主页
-拖放文件上传
-
-回到ECS命令行
+### 回到ECS命令行
+```console
 cd /root/oss/1
 ls
+```
+
 查看文件
