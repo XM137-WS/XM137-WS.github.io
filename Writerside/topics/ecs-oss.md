@@ -130,6 +130,7 @@ ossfs BucketName /root/oss -o url=Endpoint -oallow_other
 #### `BucketName` 、 `Endpoint` 与上文一致
 
 #### 修改完成以后，按下`ESC`输入`:wq` 保存即可
+#### 添加权限 && 开启自启
 ```Console
 chmod a+x /etc/init.d/ossfs
 chkconfig ossfs on
